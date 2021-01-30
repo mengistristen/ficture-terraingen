@@ -1,0 +1,26 @@
+{
+  "name": "ficture-terraingen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "chalk": "^4.1.0",
+    "cli-progress": "^3.8.2",
+    "color-interpolate": "^1.0.5",
+    "commander": "^7.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "simplex-noise": "^2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "./index.js"
+  },
+  "bin": {
+    "terraingen": "./index.js"
+  },
+  "keywords": [],
+  "author": "Tristen Mengis",
+  "license": "MIT"
+}
