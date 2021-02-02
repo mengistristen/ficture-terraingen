@@ -2,10 +2,29 @@
 const { program } = require('commander')
 const { Canvas } = require('./canvas')
 
-let canvas = Canvas(512, 512, 0.5)
+program
+  .option('-j, --height <height>', 'height of map')
+  .option('-w, --width <width>', 'width of map')
+  .option('-n, --num-train <train>', 'number of training samples')
+  .option('-t, --num-test <test>', 'number of test samples')
+  .option('-d, --dir-train <dirtrain>', 'directory for training samples')
+  .option('-e, --dir-test <dirtest>', 'directory for test samples')
 
-for (let i = 0; i < 1; ++i) {
+program.parse(process.argv)
+
+const { height, width, numTrain, numTest, dirTrain, dirTest } = program.opts()
+
+let canvas = Canvas(
+  Number.parseInt(height) || 512,
+  Number.parseInt(width) || 512
+)
+
+for (let i = 0; i < (Number.parseInt(numTrain) || 10); ++i) {
   canvas.Generate(6, 2, 3)
-  canvas.Save('train', (i + 1).toString())
+  canvas.Save(dirTrain || 'train', (i + 1).toString())
 }
-canvas.SaveMoisture()
+
+for (let i = 0; i < (Number.parseInt(numTest) || 1); ++i) {
+  canvas.Generate(6, 2, 3)
+  canvas.Save(dirTest || 'val', (i + 1).toString())
+}

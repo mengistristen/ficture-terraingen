@@ -18,7 +18,7 @@
     "start": "./index.js"
   },
   "bin": {
-    "terraingen": "./index.js"
+    "ficture-terraingen": "./index.js"
   },
   "keywords": [],
   "author": "Tristen Mengis",

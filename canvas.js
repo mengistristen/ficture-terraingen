@@ -6,10 +6,9 @@ const { getColor } = require('./colors')
 
 const black = interpolate(['#fff', '#000'])
 
-module.exports.Canvas = (height, width, sealevel) => {
+module.exports.Canvas = (height, width) => {
   const _height = height
   const _width = width
-  const _sealevel = sealevel
   const _canvas = createCanvas(_width * 2, _height)
   const _context = _canvas.getContext('2d')
   const _heightmap = new ArrayBuffer(4 * height * width)
@@ -40,10 +39,12 @@ module.exports.Canvas = (height, width, sealevel) => {
   }
 
   function Save(directory, name) {
-    if (!fs.existsSync(directory)) fs.mkdirSync(directory)
+    if (!fs.existsSync('dataset')) fs.mkdirSync('dataset')
+    if (!fs.existsSync(`./dataset/${directory}`))
+      fs.mkdirSync(`./dataset/${directory}`)
 
-    const buffer = _canvas.toBuffer('image/png')
-    fs.writeFileSync(`./${directory}/${name}.png`, buffer)
+    const buffer = _canvas.toBuffer('image/jpeg')
+    fs.writeFileSync(`./dataset/${directory}/${name}.jpeg`, buffer)
   }
 
   function SaveMoisture() {
@@ -58,9 +59,10 @@ module.exports.Canvas = (height, width, sealevel) => {
       }
     }
 
-    const buffer = canvas.toBuffer('image/png')
-    fs.writeFileSync('./moisture.png', buffer)
+    const buffer = canvas.toBuffer('image/jpeg')
+    fs.writeFileSync('./moisture.jpeg', buffer)
   }
+
   function _generateNoisemap(view, octaves, persistance, lacunarity) {
     const seed = Math.random()
     const noise = new SimplexNoise(seed.toString())
