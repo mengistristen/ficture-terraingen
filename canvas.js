@@ -22,17 +22,17 @@ module.exports.Canvas = (height, width) => {
     _generateNoisemap(moistureView, 10, 3, 7)
 
     _context.fillStyle = '#fff'
-    _context.fillRect(0, 0, _width, _height)
+    _context.fillRect(_width, 0, _width, _height)
 
     for (let y = 0; y < _height; y++) {
       for (let x = 0; x < _width; x++) {
         const elevation = heightmapView[_height * y + x]
         _context.fillStyle = getColor(elevation, moistureView[_height * y + x])
-        _context.fillRect(x + _width, y, 1, 1)
+        _context.fillRect(x, y, 1, 1)
 
-        if (elevation < 0.15 && elevation > 0.09) {
+        if (elevation < 0.17 && elevation > 0.07) {
           _context.fillStyle = '#000'
-          _context.fillRect(x, y, 1, 1)
+          _context.fillRect(x + _width, y, 1, 1)
         }
       }
     }
